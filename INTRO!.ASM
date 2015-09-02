@@ -23,8 +23,8 @@ START:
         XOR AH,AH
         INT 16H
 
-        CALL MAKE_STARS         ;H“   -‚€…“, “„“ ‚‘… 300
-        PUSH 0A000H             ;‚›„“›‚€’ —’‹? ;-E~~
+        CALL MAKE_STARS         ;HΠ£ Π¨Π Π― ΠΠ-Π’ΠΠ¨Π•ΠΠ£, Π‘Π£Π”Π£ Π’Π΅Π• 300
+        PUSH 0A000H             ;Π’Π«Π”Π£ΠΠ«Π’ΠΠΆΠ¬ Π§ΠΆΠΠ›Π? ;-E~~
         POP ES
         XOR DI,DI
 
@@ -245,7 +245,7 @@ STAR_OK:
 
 MAKE_STARS:
         MOV DI,OFFSET STARS_DATA
-        MOV CX,333               ;•… •… 300 ‡‚π‡„›...
+        MOV CX,333               ;Π¥Π• Π¥Π• 300 Π—Π’ΠΠ—Π”Π«...
 MAKE_1:
         MOV AX,320              ;X
         CALL RANDOM
@@ -269,7 +269,7 @@ DMA_OUT1:
         REP MOVSB
         POP CX
         ADD DI,320-30
-        SUB SI,62               ;—…“?! 8-[    ]
+        SUB SI,62               ;ΠΠΠ§Π•ΠΠ£?! 8-[    ]
         LOOP DMA_OUT1
 
         MOV AL,[CS:OFFSET INTS]
@@ -302,7 +302,7 @@ MASTER:
 ;=============================================================================
 
 MAIN:
-        MOV BX,00H           ;BL = ό LETTERS, BH = COMPLETE
+        MOV BX,00H           ;BL = β„– LETTERS, BH = COMPLETE
         MOV AL,[CS:OFFSET INTS]
         MOV CL,BH
         AND AL,111B
@@ -370,7 +370,7 @@ COUNT_N_LETTERS:
         LODSB
         INC CL
         AND AL,AL
-        JNZ COUNT_N_LETTERS     ;CX = ό LETTERS
+        JNZ COUNT_N_LETTERS     ;CX = β„– LETTERS
         MOV [CS:OFFSET MAIN+1],CL
         XOR AL,AL
         MOV [CS:OFFSET COUNTER+1],AL
@@ -660,7 +660,7 @@ NOT_END_OF_SYMB:
         JNZ NOT_END_OF_LINE
 
         MOV SI,OFFSET TEXT      ;END OF LINE
-        MOV AL,[CS:SI]          ;’…‘’ „‹†…H ›’! 8-|
+        MOV AL,[CS:SI]          ;ΠΆΠ•ΠΠ΅ΠΆ Π”ΠΠ›Π–Π•H Π‘Π«ΠΆΠ¬! 8-|
 
 NOT_END_OF_LINE:
         MOV [CS:OFFSET SCROLL+1],SI
@@ -790,11 +790,11 @@ PRIKOL:
         DB 'Runtime error at 1827:2648',0Dh,0Ah,'This program requires Microsoft Windows 98.'
         DB 0DH,0AH,0DH,0AH,'C:\>','$'
 PRIKOL1:
-        DB 'ƒλλλλ ¨α―y£ «¨αμ? ;-)$'
+        DB 'Π“Ρ‹Ρ‹Ρ‹Ρ‹ ΠΈΡΠΏyΠ³Π°Π»ΠΈΡΡ? ;-)$'
 
 STARS_DATA:
-        DW 333 DUP (?)   ;‘ H€“—“‘ ‘€ ‘‡„€‚€’ ‹€‘’ €’ „
-        DB 333 DUP (?)   ;‘‚ H“†„›
+        DW 333 DUP (?)   ;Π΅ΠΠΠ Π HΠΠ£Π§Π£Π΅Π¬ Π΅ΠΠ Π΅ΠΠ—Π”ΠΠ’ΠΠΆΠ¬ ΠΠ‘Π›ΠΠ΅ΠΆΠ ΠΠΠΠ―ΠΆΠ ΠΠΠ”
+        DB 333 DUP (?)   ;Π΅Π’ΠΠ HΠ£Π–Π”Π«
 
 STACK   200H
 END START
